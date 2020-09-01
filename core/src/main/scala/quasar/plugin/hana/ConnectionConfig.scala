@@ -81,33 +81,54 @@ final case class ConnectionConfig(
   }
 }
 
+// JDBC Connection Properties:
+// https://help.sap.com/viewer/0eec0d68141541d1b07893a39944924e/2.0.04/en-US/109397c2206a4ab2a5386d494f4cf75e.html
+
 object ConnectionConfig {
   val SensitiveParameters: Set[String] =
-    Set("password", "keyStorePassword", "keyPassword", "trustStorePassword")
+    Set(
+      "password",
+      "cseKeyStorePasswod",
+      "keyStorePassword",
+      "trustStorePassword",
+      "proxyPassword")
 
+  // "emptyTimestampIsNull"
+  // "instanceNumber"
+  // "key"
+  // "locale"
+  // "proxyHostname"
+  // "proxyPort"
+  // "proxyScpAccount"
+  // "proxyUserName"
+  // "siteType"
+  // "trace"
   val DeniedParameters: Set[String] =
     Set(
-      "blankTableNameMeta",
-      "defaultFetchSize",
-      "useMysqlMetadata",
-      "useReadAheadInput",
       "autocommit",
-      "useBulkStmts",
-      "useOldAliasMetadataBehavior",
-      "socketFactory",
-      "pool",
-      "poolName",
-      "maxPoolSize",
-      "minPoolSize",
-      "poolValidMinDelay",
-      "maxIdleTime",
-      "staticGlobal",
-      "useResetConnection",
-      "registerJmxPool",
-      "allowLocalInfile",
-      "useBatchMultiSend",
-      "useServerPrepStmts",
-      "rewriteBatchedStatements"
+      "closeHandlesByCleaner",
+      "closeHandlesOnFinalize",
+      "communicationTimeout",
+      "compress",
+      "connectTimeout",
+      "currentSchema", // maybe let the user set this?
+      "cursorHoldabilityType",
+      "databaseName", // maybe let the user set this?
+      "deferredPrepare",
+      "distribution",
+      "ignoreTopology",
+      "inexactDoubleToDecimalConversion",
+      "isolation",
+      "latency",
+      "maxLazyDroppedStatements",
+      "packetSize",
+      "prefetch",
+      "readOnly",
+      "reconnect",
+      "routeDirectExecute",
+      "sessionVariable",
+      "splitBatchCommands",
+      "statementCacheSize"
     )
 
   object Optics {

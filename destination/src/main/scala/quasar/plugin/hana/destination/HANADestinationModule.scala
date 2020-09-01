@@ -27,7 +27,7 @@ import quasar.plugin.jdbc.destination._
 
 import java.net.URI
 
-import argonaut.Json
+import argonaut._, Argonaut._
 
 import cats.data.NonEmptyList
 import cats.effect.{ConcurrentEffect, ContextShift, Resource, Timer}
@@ -44,8 +44,8 @@ object HANADestinationModule extends JdbcDestinationModule[DestinationConfig] {
 
   val destinationType = DestinationType("sap-hana", 1L)
 
-  // TODO
-  def sanitizeDestinationConfig(config: Json): Json = config
+  def sanitizeDestinationConfig(config: Json): Json =
+    config.as[DestinationConfig].toOption.fold(jEmptyObject)(_.sanitized.asJson)
 
   def transactorConfig(config: DestinationConfig)
       : Either[NonEmptyList[String], TransactorConfig] =
